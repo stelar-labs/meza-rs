@@ -1,3 +1,7 @@
 # Meza
 
-Meza is a library for data manipulation in Rust.
+Meza is an in-memory data table written in Rust.
+
+# Author
+
+# Disclaimer
