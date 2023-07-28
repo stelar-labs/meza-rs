@@ -1,17 +1,10 @@
 [package]
-
 name = "meza"
-
-version = "0.2.0"
-
+version = "0.2.1"
 edition = "2021"
-
 license = "MIT"
-
 description = "Meza is an in-memory data table written in Rust."
-
 repository = "https://github.com/stelar-labs/meza-rs"
-
 readme = "README.md"
 
 [dependencies]
