@@ -16,7 +16,7 @@ Meza is an in-memory data table written in Rust.
 ## Usage
 
 ### new
-`new:Vec<&str> -> Meza`
+`new: columns(Vec<&str>) -> Meza`
 
 ```
 let table = meza::Meza::new(vec!["team","goal"]);

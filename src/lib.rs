@@ -324,7 +324,7 @@ impl<'a> Meza<'a> {
 
         let sum_squared_differences: f32 = squared_differences.iter().sum();
 
-        let variance = sum_squared_differences / (values.len() as f32);
+        let variance = sum_squared_differences / (values.len() as f32 - 1.0);
 
         Ok(variance)
 
