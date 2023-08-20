@@ -8,3 +8,4 @@ repository = "https://github.com/stelar-labs/meza-rs"
 readme = "README.md"
 
 [dependencies]
+opis = "5.6.0"

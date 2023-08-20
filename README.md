@@ -9,34 +9,60 @@ Meza is an in-memory data table written in Rust.
 ## Features
 
 - Data Tables
-- Sort, Filter, Slice & Deduplicate Tables
+- Column Slice Tables
 - Import & Export for CSV
-- Column Average & Variance
+- Column Sum, Average & Variance
+- Row & Cell Search
+- Meza to `Matrix<Fraction>`
 
 ## Usage
 
 ### new
-`new: columns(Vec<&str>) -> Meza`
+```
+pub fn new(columns: Vec<&str>) -> Meza<'a>
+```
+
+### csv
+```
+pub fn from_csv(csv_path: &str) -> Result<Meza<'a>, Box<dyn Error>>
+pub fn to_csv(&self, csv_path: &str) -> Result<(), Box<dyn Error>>
+```
+
+### filter
+```
+pub fn filter<F>(&'a self, criteria: F) -> Meza<'a> where F: Fn(&Row<'a>) -> bool
+```
+
+### search
+```
+pub fn row_search(&self, key_column: &str, key: Cell) -> Result<&Row<'a>, Box<dyn Error>>
+pub fn index_row_search(&self, key_index: usize, key: Cell) -> Result<&Row<'a>, Box<dyn Error>>
+pub fn index_cell_search(&self, key_index: usize, value_index: usize, key: Cell) -> Result<&Cell, Box<dyn Error>>
+pub fn cell_search(&self, key_column: &str, value_column: &str, key: Cell) -> Result<&Cell, Box<dyn Error>>
+```
+
+### slice
+```
+pub fn row_slice(&'a self, start: usize, end: usize) -> Result<Meza<'a>, Box<dyn Error>>
+pub fn column_slice(&'a self, columns: Vec<&str>) -> Result<Meza<'a>, Box<dyn Error>>
+```
+
+### sort
+```
+pub fn sort(&mut self, column: &str, order: bool) -> Result<(), Box<dyn Error>>
+pub fn index_sort(&mut self, column_index: usize, order: bool) -> Result<(), Box<dyn Error>>
+```
+
+### statistics
+```
+pub fn calculate_sum(&mut self, column: &str)
+pub fn index_calculate_sum(&mut self, column_index: usize)
+pub fn calculate_average(&mut self, column: &str)
+pub fn index_calculate_average(&mut self, column_index: usize)
+pub fn calculate_variance(&mut self, column: &str)
+pub fn index_calculate_variance(&mut self, column_index: usize)
 
 ```
-let table = meza::Meza::new(vec!["team","goal"]);
-```
-### from_csv
-`from_csv: &str -> Result<Meza<'a>, Box<dyn Error>>`
-### to_csv
-`to_csv:&self, &str -> Result<(), Box<dyn Error>>`
-### sort
-`sort: &mut self, column(&str), order(bool) -> Result<(), Box<dyn Error>>`
-### filter
-`filter: &self, criteria(Fn(&Vec<Cell>) -> bool)) -> Meza`
-### slice
-`slice: &self, start(usize), end(usize) -> Meza`
-### dedup
-`dedup: &mut self`
-### average
-`average: &mut self, column(&str) -> Result<f32, Box<dyn Error>>`
-### variance
-`variance: &mut self, column(&str) -> Result<f32, Box<dyn Error>>`
 
 ## License
 
